@@ -44,6 +44,10 @@ public class JulianDate {
 		}
 		this.julianDate = (year - 2000) * 365 + leapYear + (mon - 1) * 28 + (mon30 * 2 + mon31 * 3) + (day - 1);
 	}
+	public JulianDate(int julianDate)
+	{
+		this.julianDate = julianDate;
+	}
 
 	// Julian Date convert to Gregorian Date. dd-MM-yyyy
 	public String[] toGreDate(int julianDate)
@@ -63,13 +67,7 @@ public class JulianDate {
 		String[] greDate = dateString.split("-");
 		return greDate;
 	}
-	
-	public JulianDate toJD(int julianDate)
-	{
-		this.julianDate = julianDate;
-		return this;
-	}
-	
+
 	public String getYear()
 	{
 		String[] greDate = this.toGreDate(this.julianDate);
@@ -105,13 +103,11 @@ public class JulianDate {
 	// Operations
 	public JulianDate add(int n)
 	{
-		int newJD = this.julianDate + n;
-		return this.toJD(newJD);
+		return new JulianDate(this.julianDate + n);
 	}
 	public JulianDate sub(int n)
 	{
-		int newJD = this.julianDate - n;
-		return this.toJD(newJD);
+		return new JulianDate(this.julianDate - n);
 	}
 	public int sub(JulianDate d)
 	{
@@ -130,7 +126,6 @@ public class JulianDate {
 	{
 		JulianDate d1 = new JulianDate(2016, 2, 14);
 		System.out.println("The julian date: " + d1.julianDate);
-		String[] date1 = d1.toGreDate(d1.julianDate);
 		System.out.println("The year: " + d1.getYear());
 		System.out.println("The month: " + d1.getMonth());
 		System.out.println("The month name: " + d1.getMonthName());
